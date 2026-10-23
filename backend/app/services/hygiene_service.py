@@ -1,6 +1,6 @@
 import io
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Any, Optional
 from PIL import Image
 from app.services.ai_service import ai_service
@@ -86,7 +86,7 @@ SAMPLE_HYGIENE_ZONES = {
 
 class HygieneService:
     def audit_hygiene(self, image_bytes: Optional[bytes] = None, sample_id: Optional[str] = None) -> HygieneAuditResponse:
-        now_str = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
+        now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
 
         # 1. Preset samples
         if sample_id and sample_id in SAMPLE_HYGIENE_ZONES:

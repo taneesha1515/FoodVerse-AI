@@ -1,6 +1,6 @@
 import io
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Any, Optional
 from PIL import Image
 from app.services.ai_service import ai_service
@@ -166,7 +166,7 @@ SAMPLE_NUTRITION_DISHES = {
 
 class NutritionService:
     def analyze_food_image(self, image_bytes: Optional[bytes] = None, sample_id: Optional[str] = None) -> NutritionAnalysisResponse:
-        now_str = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
+        now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
 
         # 1. If sample is requested
         if sample_id and sample_id in SAMPLE_NUTRITION_DISHES:
